@@ -111,7 +111,7 @@
               return formattedDate;
             },
 
-            getNumOfCommits: function (weekNum, dayInWeek) {
+            getHeatValue: function (weekNum, dayInWeek) {
               var date = getDateByWeekNumAndDay(weekNum, dayInWeek);
               //the statistic data from server is like { yyyy-MM-dd : 6 }
               var dayKey = date.format(dateFormat);
@@ -132,16 +132,16 @@
             },
 
             getTooltip: function (weekNum, dayInWeek) {
-              var numberOfCommits = this.getNumOfCommits(weekNum, dayInWeek);
+              var numberOfCommits = this.getHeatValue(weekNum, dayInWeek);
               var date = getDateByWeekNumAndDay(weekNum, dayInWeek);
               if ($scope.tooltipFormatter && angular.isFunction($scope.tooltipFormatter())){
                   return $scope.tooltipFormatter()(date, numberOfCommits);
               } else {
-                  return numberOfCommits + ' commits in ' + date.format(dateFormat);
+                  return 'Heat: ' + numberOfCommits + ' in ' + date.format(dateFormat);
               }
             },
             getColorOfDay: function (weekNum, dayInWeek) {
-              var commitCount = this.getNumOfCommits(weekNum, dayInWeek);
+              var commitCount = this.getHeatValue(weekNum, dayInWeek);
               var color = '#ffffff';
               if (commitCount > 0) {
                 var colorIndex = parseInt(commitCount / interval);
