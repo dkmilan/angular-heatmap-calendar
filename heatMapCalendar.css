@@ -1,0 +1,45 @@
+table.calendar td, th {
+    height: 1.4em;
+}
+table.calendar th.weekDayHeader {
+    width: 2.4em;
+    color: #081d58;
+}
+
+table.calendar th.monthHeader {
+
+    height: 1.4em;
+}
+
+table.calendar th.monthHeader span {
+    position: absolute;
+    margin-top: -0.7em;
+}
+
+table.calendar td.day {
+    width: 1.4em;
+    border: 1px solid #081d58;
+}
+
+table.calendar.no-border td.day {
+    width: 1.4em;
+    border: none !important;
+}
+table.legendTable td {
+    width: 2.8em;
+    height: 0.5em;
+    border: 1px solid #081d58;
+}
+
+div.legend {
+    padding-top: 2em;
+    padding-left: 2.4em;
+}
+
+div.legend table .legend-label{
+    text-align: center;
+}
+
+div.legend table .legend-label span{
+    margin-right: -2.8em;
+}

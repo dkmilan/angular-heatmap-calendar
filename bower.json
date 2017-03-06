@@ -1,0 +1,27 @@
+{
+  "name": "angular-heatmap-calendar",
+  "description": "a angular directive for heatmap calendar",
+  "main": "heatMapCalendar.js",
+  "authors": [
+    "Kenneth Dai"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.3",
+    "moment": "^2.17.1"
+  },
+  "keywords": [
+    "angular",
+    "heatmap",
+    "calendar",
+    "moment.js"
+  ],
+  "homepage": "https://github.com/dkmilan/angular-heatmap-calendar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
