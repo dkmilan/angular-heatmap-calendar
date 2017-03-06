@@ -1,6 +1,6 @@
 {
   "name": "angular-heatmap-calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a angular directive for heatmap calendar",
   "main": "heatMapCalendar.js",
   "scripts": {
