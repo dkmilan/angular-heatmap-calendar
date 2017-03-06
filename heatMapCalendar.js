@@ -37,7 +37,7 @@
         + '    </th>'
         + '  </tr>'
         + '  <tr ng-repeat="day in calendar.weekDays track by $index">'
-        + '    <th class="header" ng-if="calendar.showWeekLabel">{{day}}</th>'
+        + '    <th class="weekDayHeader" ng-if="calendar.showWeekLabel">{{day}}</th>'
         + '    <td ng-repeat="week in calendar.weeks"'
         + '        ng-class="{day: calendar.isNotFuture($index, $parent.$index), hidden: !calendar.isNotFuture($index, $parent.$index)}"'
         + '        title="{{calendar.getNumOfCommits($index, $parent.$index)}} commits on {{calendar.getFormattedDate( $index, $parent.$index)}}"'
@@ -88,6 +88,7 @@
           var showLegend = $scope.showLegend ? $scope.showLegend : true;
           var showWeekLabel = $scope.showWeekLabel ? $scope.showWeekLabel : true;
           var showMonthLabel = $scope.showMonthLabel ? $scope.showMonthLabel : true;
+          $scope.mapData = $scope.data
           $scope.calendar = {
             endWeekNumber: weekNumber,
             endDayInWeek: today.day(),

@@ -1,5 +1,15 @@
+
+
+table.calendar{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
 table.calendar td, th {
+  display: table-cell;
     height: 1.4em;
+    border-collapse: collapse;
+    box-sizing: border-box;
 }
 table.calendar th.weekDayHeader {
     width: 2.4em;
@@ -7,7 +17,7 @@ table.calendar th.weekDayHeader {
 }
 
 table.calendar th.monthHeader {
-
+	text-align: left;
     height: 1.4em;
 }
 
@@ -29,9 +39,14 @@ table.legendTable td {
     width: 2.8em;
     height: 0.5em;
     border: 1px solid #081d58;
+    box-sizing: border-box;
 }
 
+table.legendTable {
+    border-collapse: collapse;
+}
 div.legend {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding-top: 2em;
     padding-left: 2.4em;
 }
