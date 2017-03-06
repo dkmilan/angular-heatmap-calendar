@@ -17,7 +17,7 @@
     "moment.js"
   ],
   "author": "Kenneth Dai",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dkmilan/angular-heatmap-calendar/issues"
   },
