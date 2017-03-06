@@ -22,6 +22,7 @@
           data: '=',
           weeks: '@',
           interval: '@',
+          tooltipFormatter: '&',
           showLegend: '@?',
           showWeekLabel: '@?',
           showMonthLabel: '@?'
@@ -40,7 +41,7 @@
         + '    <th class="weekDayHeader" ng-if="calendar.showWeekLabel">{{day}}</th>'
         + '    <td ng-repeat="week in calendar.weeks"'
         + '        ng-class="{day: calendar.isNotFuture($index, $parent.$index), hidden: !calendar.isNotFuture($index, $parent.$index)}"'
-        + '        title="{{calendar.getNumOfCommits($index, $parent.$index)}} commits on {{calendar.getFormattedDate( $index, $parent.$index)}}"'
+        + '        title="{{calendar.getTooltip($index, $parent.$index)}}"'
         + '        ng-style="{backgroundColor: calendar.getColorOfDay( $index, $parent.$index)}"'
         + '        day="{{calendar.getFormattedDate( $index, $parent.$index)}}"'
         + '        week="{{week}}">'
@@ -88,6 +89,7 @@
           var showLegend = $scope.showLegend ? $scope.showLegend : true;
           var showWeekLabel = $scope.showWeekLabel ? $scope.showWeekLabel : true;
           var showMonthLabel = $scope.showMonthLabel ? $scope.showMonthLabel : true;
+
           $scope.mapData = $scope.data
           $scope.calendar = {
             endWeekNumber: weekNumber,
@@ -129,6 +131,15 @@
               return saturday.format("MMM");
             },
 
+            getTooltip: function (weekNum, dayInWeek) {
+              var numberOfCommits = this.getNumOfCommits(weekNum, dayInWeek);
+              var date = getDateByWeekNumAndDay(weekNum, dayInWeek);
+              if ($scope.tooltipFormatter && angular.isFunction($scope.tooltipFormatter())){
+                  return $scope.tooltipFormatter()(date, numberOfCommits);
+              } else {
+                  return numberOfCommits + ' commits in ' + date.format(dateFormat);
+              }
+            },
             getColorOfDay: function (weekNum, dayInWeek) {
               var commitCount = this.getNumOfCommits(weekNum, dayInWeek);
               var color = '#ffffff';
