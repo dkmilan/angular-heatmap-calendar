@@ -2,33 +2,33 @@
 <html ng-app="plunker">
 
 <head>
-  <meta charset="utf-8" />
-  <title>AngularJS Plunker</title>
-  <script>
-    document.write('<base href="' + document.location + '" />');
-  </script>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <link rel="stylesheet" href="style.css" />
 
-  <link rel="stylesheet" href="../heatMapCalendar.css" />
-  <script data-require="angular.js@1.3.x" src="https://code.angularjs.org/1.3.20/angular.js" data-semver="1.3.20"></script>
-  <script data-require="moment.js@2.14.1" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+    <link rel="stylesheet" href="../heatMapCalendar.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.14/angular.js" data-semver="1.4.14"></script>
+    <script data-require="moment.js@2.14.1" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
 
 
-  <script src="../heatMapCalendar.js"></script>
-  <script src="app.js"></script>
+    <script src="../heatMapCalendar.js"></script>
+    <script src="app.js"></script>
 
 </head>
 
 <body>
-  <div ng-controller="MainCtrl as vm">
+    <div ng-controller="MainCtrl as vm">
+        <heat-map-cal data="vm.map" weeks="25" show-legend="false" interval="7" map-style="round"></heat-map-cal>
+        <heat-map-cal data="vm.randomDataMap" weeks="52" interval="7" tooltip-Formatter="vm.commitTooltipFormatter"></heat-map-cal>
+    </div>
 
-    <heat-map-cal data="vm.map" weeks="52" interval ="7" tooltip-Formatter="vm.commitTooltipFormatter"></heat-map-cal>
-  </div>
 
-
-  <script type="text/javascript" charset="utf-8">
-    //angular.module("plunker")
-  </script>
+    <script type="text/javascript" charset="utf-8">
+        //angular.module("plunker")
+    </script>
 </body>
 
 </html>

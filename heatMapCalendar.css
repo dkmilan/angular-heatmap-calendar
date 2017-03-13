@@ -1,9 +1,10 @@
-
-
 table.calendar{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     border-collapse: collapse;
     box-sizing: border-box;
+}
+table.calendar.round {
+    border-collapse: separate !important;
 }
 table.calendar td, th {
   display: table-cell;
@@ -11,6 +12,7 @@ table.calendar td, th {
     border-collapse: collapse;
     box-sizing: border-box;
 }
+
 table.calendar th.weekDayHeader {
     width: 2.4em;
     color: #081d58;
@@ -31,6 +33,11 @@ table.calendar td.day {
     border: 1px solid #081d58;
 }
 
+table.calendar.round td.day {
+    width: 1.4em;
+    border: 0px;
+    border-radius: 0.7em;
+}
 table.calendar.no-border td.day {
     width: 1.4em;
     border: none !important;

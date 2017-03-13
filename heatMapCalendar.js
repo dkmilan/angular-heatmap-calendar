@@ -18,80 +18,84 @@
     .directive('heatMapCal', function () {
       return {
         restrict: 'E',
-        scope: {
-          data: '=',
+        scope: {},
+        bindToController: {
+          mapData: '=data',
           weeks: '@',
           interval: '@',
           tooltipFormatter: '&',
-          showLegend: '@?',
+          mapStyle: '@?',
+          showLegend: '=?',
           showWeekLabel: '@?',
           showMonthLabel: '@?'
         },
+        controllerAs: 'ctrl',
         template: ''
-        + '<table class="calendar">'
-        + '  <tr ng-if="calendar.showMonthLabel">'
+        + '<table class="{{ctrl.mapClasses}}">'
+        + '  <tr ng-if="ctrl.calendar.showMonthLabel">'
         + '    <th class="weekDayHeader"></th>'
-        + '    <th class="monthHeader" ng-repeat="week in calendar.weeks">'
-        + '      <span class="monthLabel" ng-if="calendar.isFirstWeekInMonth($index)">'
-        + '       {{calendar.getMonthLabelInWeek($index)}}'
+        + '    <th class="monthHeader" ng-repeat="week in ctrl.calendar.weeks">'
+        + '      <span class="monthLabel" ng-if="ctrl.calendar.isFirstWeekInMonth($index)">'
+        + '       {{ctrl.calendar.getMonthLabelInWeek($index)}}'
         + '      </span>'
         + '    </th>'
         + '  </tr>'
-        + '  <tr ng-repeat="day in calendar.weekDays track by $index">'
-        + '    <th class="weekDayHeader" ng-if="calendar.showWeekLabel">{{day}}</th>'
-        + '    <td ng-repeat="week in calendar.weeks"'
-        + '        ng-class="{day: calendar.isNotFuture($index, $parent.$index), hidden: !calendar.isNotFuture($index, $parent.$index)}"'
-        + '        title="{{calendar.getTooltip($index, $parent.$index)}}"'
-        + '        ng-style="{backgroundColor: calendar.getColorOfDay( $index, $parent.$index)}"'
-        + '        day="{{calendar.getFormattedDate( $index, $parent.$index)}}"'
+        + '  <tr ng-repeat="day in ctrl.calendar.weekDays track by $index">'
+        + '    <th class="weekDayHeader" ng-if="ctrl.calendar.showWeekLabel">{{day}}</th>'
+        + '    <td ng-repeat="week in ctrl.calendar.weeks"'
+        + '        ng-class="{day: ctrl.calendar.isNotFuture($index, $parent.$index), hidden: !ctrl.calendar.isNotFuture($index, $parent.$index)}"'
+        + '        title="{{ctrl.calendar.getTooltip($index, $parent.$index)}}"'
+        + '        ng-style="{backgroundColor: ctrl.calendar.getColorOfDay( $index, $parent.$index)}"'
+        + '        day="{{ctrl.calendar.getFormattedDate( $index, $parent.$index)}}"'
         + '        week="{{week}}">'
         + '    </td>'
         + '  </tr>'
         + '</table>'
-        + '<div class="legend" ng-if="calendar.showLegend">'
+        + '<div class="legend" ng-if="ctrl.calendar.showLegend">'
         + '  <table class="legendTable">'
         + '    <tr>'
-        + '      <td ng-repeat="color in calendar.colors" ng-style="{backgroundColor: color}"></td>'
+        + '      <td ng-repeat="color in ctrl.calendar.colors" ng-style="{backgroundColor: color}"></td>'
         + '    </tr>'
         + '    <tr>'
-        + '      <th class="legend-label" ng-repeat="color in calendar.colors track by $index" >'
-        + '        <span>{{($index+1)*calendar.interval}}</span>'
+        + '      <th class="legend-label" ng-repeat="color in ctrl.calendar.colors track by $index" >'
+        + '        <span>{{($index+1)*ctrl.calendar.interval}}</span>'
         + '      </th>'
         + '    </tr>'
         + '  </table>'
         + '</div>',
+        controller: function () {
 
-        controller: function ($scope) {
-
-          var today = moment().hours(0).minutes(0).seconds(0),
+          var self = this,
+            today = moment().hours(0).minutes(0).seconds(0),
             colors = ['#ffffd9', '#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'],
             weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
             dateFormat = 'YYYY-MM-DD'; //momentjs style
 
           var weekNumber = today.isoWeekYear();
           var weekNumArr = [];
-          for (var i = 0; i < $scope.weeks; i++) {
-            weekNumArr.push((i + weekNumber) % $scope.weeks + 1);
+          for (var i = 0; i < self.weeks; i++) {
+            weekNumArr.push((i + weekNumber) % self.weeks + 1);
           }
 
+          self.mapClasses = self.mapStyle?'calendar '+self.mapStyle:'calendar';
 
           var getDateByWeekNumAndDay = function (weekNum, dayInWeek) {
 
             var todayMnt = moment().hours(0).minutes(0).seconds(0);
-            var currentWeekIdx = $scope.weeks - 1; //current week is last week
+            var currentWeekIdx = self.weeks - 1; //current week is last week
             var weekDiff = currentWeekIdx - weekNum;
             var dayDiff = dayInWeek - todayMnt.day();
 
             var date = todayMnt.subtract(weekDiff, 'w').add(dayDiff, 'd');
             return date;
           };
-          var interval = $scope.interval ? $scope.interval : 6;
-          var showLegend = $scope.showLegend ? $scope.showLegend : true;
-          var showWeekLabel = $scope.showWeekLabel ? $scope.showWeekLabel : true;
-          var showMonthLabel = $scope.showMonthLabel ? $scope.showMonthLabel : true;
+          var interval = self.interval ? self.interval : 6;
+          var showLegend = self.showLegend!=undefined ? self.showLegend : true;
+          var showWeekLabel = self.showWeekLabel!=undefined ? self.showWeekLabel : true;
+          var showMonthLabel = self.showMonthLabel!=undefined ? self.showMonthLabel : true;
 
-          $scope.mapData = $scope.data
-          $scope.calendar = {
+          self.calendar = {
             endWeekNumber: weekNumber,
             endDayInWeek: today.day(),
             weekDays: weekDays,
@@ -102,7 +106,7 @@
             showWeekLabel: showWeekLabel,
             showMonthLabel: showMonthLabel,
             isNotFuture: function (weekNum, dayInWeek) {
-              var days = today.day() + ($scope.weeks - weekNum - 1) * 7 - dayInWeek;
+              var days = today.day() + (self.weeks - weekNum - 1) * 7 - dayInWeek;
               return days >= 0;
             },
             getFormattedDate: function (weekNum, dayInWeek) {
@@ -112,11 +116,12 @@
             },
 
             getHeatValue: function (weekNum, dayInWeek) {
+
               var date = getDateByWeekNumAndDay(weekNum, dayInWeek);
               //the statistic data from server is like { yyyy-MM-dd : 6 }
               var dayKey = date.format(dateFormat);
-
-              var commitCount = $scope.mapData && $scope.mapData[dayKey] ? $scope.mapData[dayKey] : 0;
+              //console.log(dayKey);
+              var commitCount = self.mapData && self.mapData[dayKey] ? self.mapData[dayKey] : 0;
               return commitCount;
             },
 
@@ -134,8 +139,8 @@
             getTooltip: function (weekNum, dayInWeek) {
               var numberOfCommits = this.getHeatValue(weekNum, dayInWeek);
               var date = getDateByWeekNumAndDay(weekNum, dayInWeek);
-              if ($scope.tooltipFormatter && angular.isFunction($scope.tooltipFormatter())){
-                  return $scope.tooltipFormatter()(date, numberOfCommits);
+              if (self.tooltipFormatter && angular.isFunction(self.tooltipFormatter())){
+                  return self.tooltipFormatter()(date, numberOfCommits);
               } else {
                   return 'Heat: ' + numberOfCommits + ' in ' + date.format(dateFormat);
               }
@@ -153,10 +158,6 @@
               return color;
             }
           };
-
-          $scope.$watch('data', function (mapData) {
-            $scope.mapData = mapData;
-          })
         }
       };
     })
