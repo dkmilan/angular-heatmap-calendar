@@ -7,12 +7,31 @@ angular-heatmap-calendar is a heatmap generator for angular.
 
 ## Usage
 
+``` shell
+$ bower install angular-heatmap-calendar
+
+$ npm install angular-heatmap-calendar
+```
+
+Then import angular-heatmap-calendar's js and css files into your project
+
+``` HTML
+<link rel="stylesheet" href="[Script-Path]/angular-heatmap-calendar/heatMapCalendar.css" />
+
+<script src="[Script-Path]/moment/moment.js"></script>
+<script src="[Script-Path]/angular/angular.min.js"></script>
+<script src="[Script-Path]/angular-heatmap-calendar/heatMapCalendar.js"></script>
+
+```
+
+then import module ```dk.ngHeatMapCal``` in your angular application
 ``` javascript
 //import module
 var app = angular.module('plunker', ['dk.ngHeatMapCal']);
 ```
 
-``` xml
+Use ```<heat-map-cal/>``` directive in your template
+``` html
 <heat-map-cal data="vm.randomDataMap" weeks="52" interval="8" tooltip-Formatter="vm.commitTooltipFormatter"></heat-map-cal>
 ```
 
@@ -28,3 +47,23 @@ var app = angular.module('plunker', ['dk.ngHeatMapCal']);
 |showLegend|false|should show legend component|
 |showWeekLabel|false|should show week label|
 |showMonthLabel|false|should show month Label|
+
+
+### examples
+|parameter name|value|
+|--------------|-----|
+|mapStyle|round|
+|showLegend|false|
+|showWeekLabel|false|
+|showMonthLabel|false|
+
+![image](https://raw.github.com/dkmilan/angular-heatmap-calendar/resources/round-simple.png)
+
+examples
+|parameter name|value|
+|--------------|-----|
+|showLegend|true|
+|showWeekLabel|true|
+|showMonthLabel|true|
+
+![image](https://raw.github.com/dkmilan/angular-heatmap-calendar/resources/square-legend-label.png)

@@ -2,3 +2,10 @@
 body {
   font-size: 12px;
 }
+body>div {
+    padding-left: 5em;
+}
+hr {
+    margin-top: 2em;
+    margin-bottom:2em;
+}

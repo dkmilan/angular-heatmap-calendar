@@ -26,8 +26,8 @@
           tooltipFormatter: '&',
           mapStyle: '@?',
           showLegend: '=?',
-          showWeekLabel: '@?',
-          showMonthLabel: '@?'
+          showWeekLabel: '=?',
+          showMonthLabel: '=?'
         },
         controllerAs: 'ctrl',
         template: ''

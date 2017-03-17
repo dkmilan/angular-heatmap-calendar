@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="style.css" />
 
     <link rel="stylesheet" href="../heatMapCalendar.css" />
-    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.14/angular.js" data-semver="1.4.14"></script>
-    <script data-require="moment.js@2.14.1" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
-
-
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../heatMapCalendar.js"></script>
     <script src="app.js"></script>
 
@@ -21,8 +19,11 @@
 
 <body>
     <div ng-controller="MainCtrl as vm">
-        <heat-map-cal data="vm.map" weeks="25" show-legend="false" interval="7" map-style="round"></heat-map-cal>
-        <heat-map-cal data="vm.randomDataMap" weeks="52" interval="7" tooltip-Formatter="vm.commitTooltipFormatter"></heat-map-cal>
+        <heat-map-cal data="vm.map" weeks="25" show-week-label="false" show-month-label="false"
+         show-legend="false" interval="7" map-style="round"></heat-map-cal>
+
+<hr>
+        <heat-map-cal data="vm.randomDataMap" weeks="52" interval="8" tooltip-Formatter="vm.commitTooltipFormatter"></heat-map-cal>
     </div>
 
 
