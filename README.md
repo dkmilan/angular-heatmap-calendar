@@ -59,7 +59,7 @@ Use ```<heat-map-cal/>``` directive in your template
 
 ![image](https://raw.github.com/dkmilan/angular-heatmap-calendar/resources/round-simple.png)
 
-examples
+
 |parameter name|value|
 |--------------|-----|
 |showLegend|true|
